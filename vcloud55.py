@@ -9,7 +9,7 @@ def getorgurl(token):
 	xml=get('https://www.cloud.kth.se/api/org/',headers={'Accept':'application/*+xml;version=5.1','x-vcloud-authorization':token},verify=False).text
 	return parseString(xml).getElementsByTagName('Org')[0].attributes['href'].value
 
-def getvcdurl(u,token):
+def getvdcurl(u,token):
 	xml=get(orgurl,headers={'Accept':'application/*+xml;version=5.1','x-vcloud-authorization':token},verify=False).text
 	#print xml
 	for e in parseString(xml).getElementsByTagName('Link'):
@@ -64,7 +64,7 @@ if __name__ == '__main__':
 	else:
 		sys.exit(1)
 	orgurl=getorgurl(vca)
-	vdcurl=getvcdurl(orgurl,vca)
+	vdcurl=getvdcurl(orgurl,vca)
 	print vdcurl
 	vapps=getvapps(vdcurl,vca)
 	print vapps
